@@ -197,7 +197,7 @@
 </head>
 <body>
     <div class="container">
-        <a href="index.html" class="back-link">← Back to Fruuuniverse</a>
+        <a href="index.html" class="back-link">← Back to Homepage</a>
         
         <div class="header">
             <h1>Weather Comparison</h1>
@@ -277,35 +277,21 @@
 
         // Function to fetch weather data
         async function fetchWeather(coords, cityName) {
-            // For demo purposes, we'll use mock data since you need an API key
-            // In production, uncomment the real API call below
-            
-            // Real API call (uncomment when you have an API key):
-            /*
-            const response = await fetch(
-                `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&appid=${API_KEY}&units=metric`
-            );
-            if (!response.ok) throw new Error('Weather data not available');
-            return await response.json();
-            */
-            
-            // Mock data for demo (remove when using real API)
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
-            
-            const mockData = {
-                vienna: {
-                    main: { temp: 12, feels_like: 10, humidity: 65, pressure: 1015 },
-                    weather: [{ description: 'partly cloudy' }],
-                    wind: { speed: 3.2 }
-                },
-                brixlegg: {
-                    main: { temp: 8, feels_like: 6, humidity: 78, pressure: 1020 },
-                    weather: [{ description: 'light rain' }],
-                    wind: { speed: 2.1 }
+
+            try {
+                // Call our Cloudflare Worker endpoint
+                const response = await fetch(`/api/weather?lat=${coords.lat}&lon=${coords.lon}`);
+                
+                if (!response.ok) {
+                    throw new Error(`Weather data not available (${response.status})`);
                 }
-            };
-            
-            return cityName === 'vienna' ? mockData.vienna : mockData.brixlegg;
+                
+                return await response.json();
+            } catch (error) {
+                console.error(`Error fetching ${cityName} weather:`, error);
+                throw error;
+            }
+
         }
 
         // Function to update weather display
@@ -400,12 +386,6 @@
             loadWeatherData();
             startAutoRefresh();
         });
-
-        // Note: To use real weather data, you need to:
-        // 1. Sign up for a free API key at https://openweathermap.org/api
-        // 2. Replace 'demo_key' with your actual API key
-        // 3. Uncomment the real API call in fetchWeather function
-        // 4. Remove the mock data section
     </script>
 </body>
 </html>
