@@ -113,10 +113,18 @@
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
         
-        .weather-button {
+        /* Button container for top buttons */
+        .top-buttons {
             position: absolute;
             top: 20px;
             left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        /* Base button styling */
+        .top-button {
             display: inline-flex;
             align-items: center;
             padding: 12px 20px;
@@ -128,18 +136,25 @@
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s ease;
-            z-index: 10;
         }
         
-        .weather-button:hover {
+        .top-button:hover {
             background: #ff6b35;
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
         }
         
+        /* Weather button specific */
         .weather-button::before {
             content: '🌡️';
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+        
+        /* TODOs button specific */
+        .todos-button::before {
+            content: '📝';
             margin-right: 8px;
             font-size: 1.2rem;
         }
@@ -150,6 +165,16 @@
             opacity: 0.8;
             line-height: 1.6;
             color: #333;
+        }
+        
+        .footer {
+            margin-top: 1.5rem;
+        }
+        
+        .footer p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
         }
         
         @media (max-width: 768px) {
@@ -167,9 +192,11 @@
                 align-items: center;
             }
             
-            .weather-button {
+            .top-buttons {
                 position: static;
+                justify-content: center;
                 margin-bottom: 1rem;
+                width: 100%;
             }
             
             .service-link {
@@ -177,16 +204,14 @@
                 max-width: 250px;
             }
         }
-        
-            
-            .welcome-text {
-                font-size: 1.1rem;
-            }
-        }
     </style>
 </head>
 <body>
-    <a href="weather.html" class="weather-button">Weather</a>
+    <!-- Container for top buttons -->
+    <div class="top-buttons">
+        <a href="weather.html" class="top-button weather-button">Weather</a>
+        <a href="https://docs.google.com/document/d/1ChX4odcU57wCYrPUMgRCZWiaF473wbHtRk3CfSzXDaA/edit?usp=sharing" class="top-button todos-button">TODOs</a>
+    </div>
     
     <div class="container">
         <h1>Enter the Fruuuniverse</h1>
