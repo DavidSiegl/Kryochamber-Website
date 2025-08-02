@@ -145,6 +145,13 @@
             box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
         }
         
+        /* Blog button specific */
+        .blog-button::before {
+            content: '📝';
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+        
         /* Weather button specific */
         .weather-button::before {
             content: '🌡️';
@@ -154,7 +161,7 @@
         
         /* TODOs button specific */
         .todos-button::before {
-            content: '📝';
+            content: '📋';
             margin-right: 8px;
             font-size: 1.2rem;
         }
@@ -197,6 +204,7 @@
                 justify-content: center;
                 margin-bottom: 1rem;
                 width: 100%;
+                flex-wrap: wrap;
             }
             
             .service-link {
@@ -209,6 +217,7 @@
 <body>
     <!-- Container for top buttons -->
     <div class="top-buttons">
+        <a href="https://blog.kryochamber.xyz" class="top-button blog-button" target="_blank">Blog</a>
         <a href="weather.html" class="top-button weather-button">Weather</a>
         <a href="https://docs.google.com/document/d/1ChX4odcU57wCYrPUMgRCZWiaF473wbHtRk3CfSzXDaA/edit?usp=sharing" class="top-button todos-button" target="_blank">TODOs</a>
     </div>
